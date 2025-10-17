@@ -1,30 +1,28 @@
 /* Questions / things I need to look up: 
-- Syntax for loops
-- Which variables should be local / global?
+- None! 
 */
 
 /* Keep track of player scores and inputs */
 let playerScore = 0;
 let computerScore = 0;
-let humanChoice = "";
+let playerChoice = "";
 let computerChoice = 0;
+const drawScore = 0;
 
-/* Get the human choice */
-function getHumanChoice() {
-    let humanChoice = prompt("Rock, paper, or scissors?");
-    console.log("You chose: " + humanChoice);
-    if (humanChoice.toLowerCase() === "rock") return 'r';
-    else if (humanChoice.toLowerCase() === "paper") return 'p';
-    else if (humanChoice.toLowerCase() === "scissors") return 's';
-    else return 0;
+/* Get the player choice */
+function getPlayerChoice() {
+    playerChoice = prompt("Rock, paper, or scissors?"); 
+    answer = playerChoice.toLowerCase(); 
+    // todo: This is where we would do error handling and account for other inputs
+    return answer;
 }
 
 /* Get the computer choice */
 function getComputerChoice() {
-    let computerChoice = Math.floor(Math.random()*3); // Generate a number between 0 and 2 inclusive
-    if (computerChoice === 0) return 'r';
-    else if (computerChoice === 1) return 'p';
-    else if (computerChoice === 2) return 's';
+    let randnum = Math.floor(Math.random()*3); // Generate a number between 0 and 2 inclusive
+    if (randnum === 0) return 'rock';
+    else if (randnum === 1) return 'paper';
+    else if (randnum === 2) return 'scissors';
     // This should never trigger, but just in case...
     else{ 
         console.log("ComputerChoice() Error - you should not be seeing this message.");
@@ -32,29 +30,26 @@ function getComputerChoice() {
     }
 }
 
-/* Play a single round
-- Create a function to play a single round
-- CALL the functions to get computer choice and human choice
-- EVALUATE winner
-- increment the scores based on round winner and OUTPUT round result to console
-*/
+/* Play a single round */
 function playRound(){
-    humanChoice = getComputerChoice();
-    computerChoice = getHumanChoice();
+    playerChoice = getPlayerChoice();
+    computerChoice = getComputerChoice();
+    console.log("You chose: " + playerChoice)
+    console.log("Computer chose: " + computerChoice)
 
     // Result: Draw - both choices are same.
-    if (humanChoice === computerChoice){
+    if (playerChoice === computerChoice){
         console.log("Draw!")
     }
     
     // Result: Won - 1 of 3 scenarios
     else if (
-        humanChoice === 'r' && computerChoice === 's' // Rock beats scissor
-        || humanChoice === 'p' && computerChoice==='r' // Paper beats rock
-        || humanChoice === 's' && computerChoice === 'p' // Scissors beats paper
+        playerChoice === 'rock' && computerChoice === 'scissors' // Rock beats scissor
+        || playerChoice === 'paper' && computerChoice==='rock' // Paper beats rock
+        || playerChoice === 'scissors' && computerChoice === 'paper' // Scissors beats paper
     ){
         console.log("You win!")
-        humanScore++;
+        playerScore++;
     }
 
     // Result: Lost - if not a draw and not a win, must be a loss so no test needed
@@ -64,26 +59,24 @@ function playRound(){
     } 
 }
 
-
-
-// Play the entire game - MAIN function
-    // CALL the single round function 5 times with a loop 
-        // Create a loop
-        // call playRound() and store results
-        // Increment scores?
-        // output results to console.log()
-    // OUTPUT final result
 function main() {
+    // play 5 rounds
     for (let i=0; i<5; i++){
        playRound(); 
     }
-    console.log("Rounds won: ")
-    console.log("Rounds lost: ")
-    if (humanScore > computerScore){ 
-        console.log("Result: Player wins! Congrats!");
+    
+    //Print results
+    console.log("Game completed! Results: ")
+    console.log("Rounds won: " + playerScore)
+    console.log("Rounds lost: " + computerScore )
+    drawScore = 5 - playerScore - computerScore
+    console.log("Draws: " + drawScore)
+
+    if (playerScore > computerScore){ 
+        console.log("Final result: Player wins! Congrats!");
     }
-    else if (computerScore > humanScore){ 
-        console.log("Result: Computer wins! better luck next time!");
+    else if (computerScore > playerScore){ 
+        console.log("Final result: Computer wins! better luck next time!");
     }
     else { 
         console.log("Its a draw!")
@@ -93,17 +86,15 @@ function main() {
 main()
 
 
-
-
 /* Ideas & features outside the scope of this project:
 - Let the computer "cheat" by weighting the "random" choice towards paper, because the human player
     is more likely to choose rock (its the first in the list and easiest to type)
 - Let the player cheat with secret input options - ie.: bomb beats everything
-- unlock "advanced mode", which turns the game into rock-paper-scissors-lizard-spock
-- Show the running score in the HTML page, and stats about games won/lost
+- Option to unlock "advanced mode", which turns the game into rock-paper-scissors-lizard-spock
+- Show the running score in the HTML page instead of console, and show stats about games won/lost
 - Create logging so I can review how people played the game and what they chose
 - Create a web page for showing lifetime / historical player stats - leaderboard? Fancy graphs?
-- More robust error handling for human input
+- More robust error handling for human input (TOP project page explicitly says don't worry about this yet)
 - Buttons to click on instead of relying on typed input - covered in later lesson
 - Simplify and condense code - covered in later lesson
 */
