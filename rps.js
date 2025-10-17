@@ -44,8 +44,7 @@ function playRound(){
 
     // Result: Draw - both choices are same.
     if (humanChoice === computerChoice){
-        // print draw message
-        // do not increment score counter
+        console.log("Draw!")
     }
     
     // Result: Won - 1 of 3 scenarios
@@ -54,14 +53,14 @@ function playRound(){
         || humanChoice === 'p' && computerChoice==='r' // Paper beats rock
         || humanChoice === 's' && computerChoice === 'p' // Scissors beats paper
     ){
-        // print winner message
-        // increment score counter
+        console.log("You win!")
+        humanScore++;
     }
 
     // Result: Lost - if not a draw and not a win, must be a loss so no test needed
     else {
-        // print loser message
-        // increment score counter
+        console.log("Computer wins!")
+        computerScore++;
     } 
 }
 
@@ -74,11 +73,33 @@ function playRound(){
         // Increment scores?
         // output results to console.log()
     // OUTPUT final result
+function main() {
+    for (let i=0; i<5; i++){
+       playRound(); 
+    }
+    console.log("Rounds won: ")
+    console.log("Rounds lost: ")
+    if (humanScore > computerScore){ 
+        console.log("Result: Player wins! Congrats!");
+    }
+    else if (computerScore > humanScore){ 
+        console.log("Result: Computer wins! better luck next time!");
+    }
+    else { 
+        console.log("Its a draw!")
+    }
+}
+
+main()
+
+
+
 
 /* Ideas & features outside the scope of this project:
 - Let the computer "cheat" by weighting the "random" choice towards paper, because the human player
     is more likely to choose rock (its the first in the list and easiest to type)
 - Let the player cheat with secret input options - ie.: bomb beats everything
+- unlock "advanced mode", which turns the game into rock-paper-scissors-lizard-spock
 - Show the running score in the HTML page, and stats about games won/lost
 - Create logging so I can review how people played the game and what they chose
 - Create a web page for showing lifetime / historical player stats - leaderboard? Fancy graphs?
