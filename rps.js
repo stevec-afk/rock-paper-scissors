@@ -7,7 +7,7 @@ let playerScore = 0;
 let computerScore = 0;
 let playerChoice = "";
 let computerChoice = 0;
-const drawScore = 0;
+let drawScore = 0;
 
 /* Get the player choice */
 function getPlayerChoice() {
@@ -40,6 +40,7 @@ function playRound(){
     // Result: Draw - both choices are same.
     if (playerChoice === computerChoice){
         console.log("Draw!")
+        drawScore++
     }
     
     // Result: Won - 1 of 3 scenarios
@@ -69,7 +70,6 @@ function main() {
     console.log("Game completed! Results: ")
     console.log("Rounds won: " + playerScore)
     console.log("Rounds lost: " + computerScore )
-    drawScore = 5 - playerScore - computerScore
     console.log("Draws: " + drawScore)
 
     if (playerScore > computerScore){ 
@@ -81,6 +81,7 @@ function main() {
     else { 
         console.log("Its a draw!")
     }
+    console.log("Refresh page to play again.")
 }
 
 main()
