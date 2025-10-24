@@ -1,26 +1,37 @@
+/* ToDo:
+- DONE: remove logic limiting to 5 rounds, and instead make it first to 5 wins
+- Move results to seperate function
+- Create a UI on the HTML pages, including
+    - Start game button to trigger playRound() function
+    - Scoreboard
+    - Buttons to click for playerChoice()
+    - output results of round & game to HTML page instead of console
+    - Display icon to show choices
+- Add unique language for each scenario, ie.: paper DISPROVES spock.
+- Cleanup comments
+- Advanced mode: Update the game logic to rock-paper-scissors-lizard-spock (Major feature - new branch, do seperately)
+    - Add link to youtube clip of TBBT explaining - https://www.youtube.com/watch?v=pIpmITBocfM
+    - Static image showing rules / logic - CC license requires attribution: https://puzzlewocky.com/parlor-games/rock-paper-scissors-lizard-spock/
+    - link to original rules on the web - also CC-NC3.0 license, requires attribution: https://www.samkass.com/theories/RPSSL.html
+- Text mode: old-school adventure style game played only by console
+*/
 let playerScore = 0;
 let computerScore = 0;
 let playerChoice = "";
 let computerChoice = 0;
 let drawScore = 0;
 
+// maybe trash this whole function and replace with a handler for button clicks
 function getPlayerChoice() {
     playerChoice = prompt("Rock, paper, or scissors?"); 
     answer = playerChoice.toLowerCase(); 
-    // This is where we would do error handling and account for other inputs - out of scope for now
     return answer;
 }
 
+//generate a number between 1-3 inclusive and return that position in the choices array
 function getComputerChoice() {
-    let randnum = Math.floor(Math.random()*3); // Generate a number between 0 and 2 inclusive
-    if (randnum === 0) return 'rock';
-    else if (randnum === 1) return 'paper';
-    else if (randnum === 2) return 'scissors';
-    // This should never trigger, but just in case...
-    else{ 
-        console.log("ComputerChoice() Error - you should not be seeing this message.");
-        return 0;
-    }
+    const choices = ['rock', 'paper', 'scissors'];
+    return choices[Math.floor(Math.random()*3)];
 }
 
 function playRound(){
@@ -52,11 +63,8 @@ function playRound(){
     } 
 }
 
-function main() {
-    for (let i=0; i<5; i++){
-       playRound(); 
-    }
-    
+// Currently prints results to console - update this to output to page instead
+function results() {
     console.log("Game completed! Results: ")
     console.log("Rounds won: " + playerScore)
     console.log("Rounds lost: " + computerScore )
@@ -71,8 +79,19 @@ function main() {
     else { 
         console.log("Its a draw!")
     }
+    // Remove this and add 'Restart' button which reinitializes the game
     console.log("Refresh page to play again.")
 }
 
-main()
+// make this called only when start button is pressed
+function main() {
+    // todo: Delete the start button and initialize the game
 
+    while (playerScore < 5 && computerScore < 5){
+       playRound(); 
+    }
+    
+    results(); 
+}
+
+main()
