@@ -1,8 +1,9 @@
 /* ToDo:
-- DONE: remove logic limiting to 5 rounds, and instead make it first to 5 wins
-- Move results to seperate function
+- DONE: Remove logic limiting to 5 rounds, and instead make it first to 5 wins
+- DONE: Move results to seperate function
+- DONE: Add a replay button (whew that was harder than I thought!)
 - Create a UI on the HTML pages, including
-    - Start game button to trigger playRound() function
+    - DONE: Start game button to trigger playRound() function
     - Scoreboard
     - Buttons to click for playerChoice()
     - output results of round & game to HTML page instead of console
@@ -17,18 +18,18 @@
 */
 let playerScore = 0;
 let computerScore = 0;
+let drawScore = 0;
 let playerChoice = "";
 let computerChoice = 0;
-let drawScore = 0;
 
-// maybe trash this whole function and replace with a handler for button clicks
+// Maybe trash this whole function and replace with a handler for button clicks
 function getPlayerChoice() {
     playerChoice = prompt("Rock, paper, or scissors?"); 
     answer = playerChoice.toLowerCase(); 
     return answer;
 }
 
-//generate a number between 1-3 inclusive and return that position in the choices array
+// Generate a number between 1-3 inclusive to choose from 3 options
 function getComputerChoice() {
     const choices = ['rock', 'paper', 'scissors'];
     return choices[Math.floor(Math.random()*3)];
@@ -64,7 +65,7 @@ function playRound(){
 }
 
 // Currently prints results to console - update this to output to page instead
-function results() {
+function showResults() {
     console.log("Game completed! Results: ")
     console.log("Rounds won: " + playerScore)
     console.log("Rounds lost: " + computerScore )
@@ -79,19 +80,34 @@ function results() {
     else { 
         console.log("Its a draw!")
     }
-    // Remove this and add 'Restart' button which reinitializes the game
-    console.log("Refresh page to play again.")
 }
 
-// make this called only when start button is pressed
-function main() {
-    // todo: Delete the start button and initialize the game
+// Make a button to replay the game
+function addReplayButton(){
+    const replayButton = document.createElement('button');
+    replayButton.textContent = "Play again?";
+    replayButton.classList.add('startButton');
+    gameContainer.appendChild(replayButton);
+    initButton = document.querySelector('.startButton');
+    replayButton.addEventListener('click', main); 
+}
 
-    while (playerScore < 5 && computerScore < 5){
-       playRound(); 
-    }
+// Main game loop - start on button click
+function main(){
+    // Reset the game 
+    initButton.remove();
+    playerScore = 0;
+    computerScore = 0;
+    drawScore - 0;
     
-    results(); 
+    do {
+        playRound(); 
+    } while (playerScore < 5 && computerScore < 5)
+     
+    showResults();
+    addReplayButton();
 }
 
-main()
+const gameContainer = document.getElementById('gameContainer');
+let initButton = document.querySelector('.startButton');
+initButton.addEventListener('click', main);
