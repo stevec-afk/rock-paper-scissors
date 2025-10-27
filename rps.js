@@ -22,12 +22,12 @@ let drawScore = 0;
 let playerChoice = "";
 let computerChoice = 0;
 
-// Maybe trash this whole function and replace with a handler for button clicks
-function getPlayerChoice() {
-    playerChoice = prompt("Rock, paper, or scissors?"); 
-    answer = playerChoice.toLowerCase(); 
-    return answer;
-}
+const rockButton = document.createElement("button");
+rockButton.textContent = "rock";
+const paperButton = document.createElement("button");
+paperButton.textContent = "paper";
+const scissorsButton = document.createElement("button");
+scissorsButton.textContent = "scissors";
 
 // Generate a number between 1-3 inclusive to choose from 3 options
 function getComputerChoice() {
@@ -36,7 +36,6 @@ function getComputerChoice() {
 }
 
 function playRound(){
-    playerChoice = getPlayerChoice();
     computerChoice = getComputerChoice();
     console.log("You chose: " + playerChoice)
     console.log("Computer chose: " + computerChoice)
@@ -61,11 +60,15 @@ function playRound(){
     else {
         console.log("Computer wins!")
         computerScore++;
-    } 
+    }
+    console.log("Current Score - Computer: "+computerScore+", Player: "+playerScore);
+    
+    if (playerScore > 4 || computerScore > 4 ){
+        gameOver()
+    }
 }
 
-// Currently prints results to console - update this to output to page instead
-function showResults() {
+function gameOver() {
     console.log("Game completed! Results: ")
     console.log("Rounds won: " + playerScore)
     console.log("Rounds lost: " + computerScore )
@@ -80,16 +83,19 @@ function showResults() {
     else { 
         console.log("Its a draw!")
     }
-}
 
-// Make a button to replay the game
-function addReplayButton(){
+    rockButton.remove();
+    paperButton.remove();
+    scissorsButton.remove();
+
+    // Add a button to replay the game
     const replayButton = document.createElement('button');
     replayButton.textContent = "Play again?";
     replayButton.classList.add('startButton');
     gameContainer.appendChild(replayButton);
     initButton = document.querySelector('.startButton');
     replayButton.addEventListener('click', main); 
+
 }
 
 // Main game loop - start on button click
@@ -98,14 +104,17 @@ function main(){
     initButton.remove();
     playerScore = 0;
     computerScore = 0;
-    drawScore - 0;
-    
-    do {
-        playRound(); 
-    } while (playerScore < 5 && computerScore < 5)
-     
-    showResults();
-    addReplayButton();
+    drawScore = 0;
+    console.log("===== NEW GAME =====")
+
+    playerOptions = [rockButton, paperButton, scissorsButton]
+    playerOptions.forEach(option => {
+        option.addEventListener('click', function () {
+            playerChoice = option.textContent;
+            playRound();
+        });
+        gameContainer.appendChild(option);
+    });
 }
 
 const gameContainer = document.getElementById('gameContainer');
