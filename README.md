@@ -19,3 +19,4 @@ Brainstorming ideas & features (things I want to add but are outside the scope o
 - Add animations each round for "1 - 2 - 3 - GO!"
 - Branch idea: text-only mode, oldschool adventure style! (learn about sanitizing user input)
 - Branch idea: advanced mode, rock - paper - scissors - lizard - spock
+- Branch idea: 2-player mode, hotseat style

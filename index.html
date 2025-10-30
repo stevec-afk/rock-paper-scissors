@@ -7,19 +7,41 @@
     <link rel="stylesheet" href="styles.css">
     <!-- Use saved icon -->
     <!-- <link rel='icon' href='favicon.ico' type='image/x-icon'/> -->
-    
     <!-- No icon -->
     <link rel="shortcut icon" href="#">
-    
     <!-- Default web icon -->
     <!-- <link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon"> -->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@600&display=swap" rel="stylesheet">
+    <script src="rps.js" defer> </script>
 </head>
 <body>
-    <script src="rps.js" defer> </script>
-    <H1>Rock paper scissors</H1>
-    <div> scoreboard </div>
-    <div id="gameContainer"> 
+    <div id="center-wrapper">
+        <img class="img" src="images/banner.png" height="200">
+        <div class="scoreboard">
+            <div class="scorebox">
+                <p>Player</p>
+                <span id="player-score">0</span>
+            </div>
+            <div class="scorebox">
+                <p>Computer</p>
+                <span id="computer-score">0</span>
+            </div>
+        </div>
         <button class="startButton">Start!</button>
+        <div class="buttons">
+            <div class="rockBtn"></div>
+            <div class="paperBtn"></div>
+            <div class="scissorsBtn"></div>
+            <div class="lizardBtn"></div>
+            <div class="spockBtn"></div>
+        </div>
+        <div id="gameContainer"> 
+            <!-- <img class="img" src="images/RockPaperScissorsLizardSpock.jpg" width="600" height="480"> -->
+            
+        </div>
     </div>
 </body>
 <footer>

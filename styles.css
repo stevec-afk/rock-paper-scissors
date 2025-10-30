@@ -1,4 +1,43 @@
+#center-wrapper {
+    width: 75%;
+    margin: auto;
+}
+
+body {
+    font-family: "Barlow Condensed", sans-serif;
+}
+
+.scoreboard {
+    display: flex; 
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.scorebox {
+    min-width: 5em;
+    border: 2px solid black;
+    margin: 2px;
+    text-align: center;
+}
+
 .startButton {
+    display: block;
     font-size: 12px;
-    margin: 20px;
+    margin: auto;
+}
+
+#gameContainer {
+    width: 600px;
+    height: 400px;
+    margin: auto;
+    background-image: url("images/RockPaperScissorsLizardSpock.jpg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;;
+}
+
+.img {
+    display: block;
+    margin: auto;
+    width: 50%;
 }
