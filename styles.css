@@ -1,43 +1,72 @@
-#center-wrapper {
-    width: 75%;
-    margin: auto;
-}
-
 body {
-    font-family: "Barlow Condensed", sans-serif;
-}
-
-.scoreboard {
-    display: flex; 
-    justify-content: center;
-    margin-bottom: 10px;
-}
-
-.scorebox {
-    min-width: 5em;
-    border: 2px solid black;
-    margin: 2px;
+    font-family: "Roboto", sans-serif;
     text-align: center;
 }
 
-.startButton {
-    display: block;
-    font-size: 12px;
-    margin: auto;
+.grid-container {
+    max-width: 900px;
+    display: inline-grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    grid-auto-rows: 1fr;
 }
 
-#gameContainer {
-    width: 600px;
-    height: 400px;
-    margin: auto;
-    background-image: url("images/RockPaperScissorsLizardSpock.jpg");
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: 50% 50%;;
+.banner {
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #28a745
 }
 
-.img {
-    display: block;
-    margin: auto;
-    width: 50%;
+.game-container {
+    grid-column: 1 / -1;
+    display:flex;
+    justify-content: space-evenly;
+}
+
+.playerChoice{
+    grid-column: 1 / 3;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+} 
+
+.choiceButton {
+    font-style: italic;
+    font-weight: 500;
+    font-size: 24px;
+}
+
+.scorecard {
+    grid-column: -3 / -1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 1em;
+    margin: 1em;
+
+}
+.scorebox {
+    border: 4px solid #5b5f68;
+    border-radius: 8px;
+    width: 70px;
+    height: 70px;
+    text-align: center;
+}
+
+#playerScore,
+#computerScore {
+    display:flex;
+    flex-direction: row;
+    gap: 5px;
+
+}
+
+.messages {
+    margin-left: 2em;
+    text-align: left;
+    grid-row-start: 3;
+    grid-column: 1 / -1;
 }
