@@ -13,36 +13,24 @@
 </head>
 <body>
     <div class="grid-container">
-        <div class="banner">
-            <h1>🏆 YOU WIN!</h1>
-        </div>
+        <div class="banner"></div>
+        <div class="menu"> Rules | Original version | github </div>
         <div class="playerChoice">
-            <div class="choiceButton">ROCK <span>🪨</span></div>
-            <div class="choiceButton">PAPER <span>📄</span></div>                    
-            <div class="choiceButton">SCISSORS <span>✂️</span></div>
-            <div class="choiceButton">LIZARD <span>🦎</span></div>
-            <div class="choiceButton">SPOCK <span>🖖</span></div>
+            <div class="choiceButton" id="rock">ROCK <span>🪨</span></div>
+            <div class="choiceButton" id="paper">PAPER <span>📄</span></div>                    
+            <div class="choiceButton" id="scissors">SCISSORS <span>✂️</span></div>
+            <div class="choiceButton" id="lizard">LIZARD <span>🦎</span></div>
+            <div class="choiceButton" id="spock">SPOCK <span>🖖</span></div>
         </div>
-        <div class="scorecard">
-            <div id="playerScore">
-                <span>Player</span>
-                <div class="scorebox"></div>
-                <div class="scorebox"></div>
-                <div class="scorebox"></div>
-                <div class="scorebox"></div>
-                <div class="scorebox"></div>
-            </div>
-            <div id="computerScore">
-                <span>Computer</span>
-                <div class="scorebox"></div>
-                <div class="scorebox"></div>
-                <div class="scorebox"></div>
-                <div class="scorebox"></div>
-                <div class="scorebox"></div>
-            </div>
+        <div class="score">
+            <div id="playerScore">0</div>
+             - 
+            <div id="computerScore">0</div>
         </div>     
         <div class="messages">
-            <p>Round 1: Lizard Poisons Spock <span class="roundResult">🦎 ✅️</span></p>
+            <ul>
+                <li> Round 1: Lizard Poisons Spock <span class="roundResult">🦎 ✅️</span></li>
+            </ul>
         </div>
      </div>
 </body>

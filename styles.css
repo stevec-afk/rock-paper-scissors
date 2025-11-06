@@ -3,30 +3,47 @@ body {
     text-align: center;
 }
 
+ul {
+    list-style-type: none;
+}
+
 .grid-container {
     max-width: 900px;
     display: inline-grid;
-    grid-template-columns: repeat(6, 1fr);
-    grid-template-rows: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: 2fr auto auto auto;
+    grid-template-areas:
+        'header header header header'
+        'menu menu menu menu'
+        'score score score score'
+        'choices messages messages messages';
     grid-auto-rows: 1fr;
 }
 
 .banner {
-    grid-column: 1 / -1;
+    grid-area: header;
+    background-image: url(images/banner.png);
+    height: 150px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.menu {
+    grid-area: menu;
+}
+
+.score {
+    grid-area: score;
     display: flex;
     justify-content: center;
-    align-items: center;
-    color: #28a745
+    gap: 0.5em;
+    margin: 0.5em;
+    font-size: 48px;
 }
 
-.game-container {
-    grid-column: 1 / -1;
-    display:flex;
-    justify-content: space-evenly;
-}
-
-.playerChoice{
-    grid-column: 1 / 3;
+.playerChoice {
+    grid-area: choices;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -39,34 +56,12 @@ body {
     font-size: 24px;
 }
 
-.scorecard {
-    grid-column: -3 / -1;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    gap: 1em;
-    margin: 1em;
-
-}
-.scorebox {
-    border: 4px solid #5b5f68;
-    border-radius: 8px;
-    width: 70px;
-    height: 70px;
-    text-align: center;
-}
-
-#playerScore,
-#computerScore {
-    display:flex;
-    flex-direction: row;
-    gap: 5px;
-
+.choiceButton span {
+    font-style: normal;
 }
 
 .messages {
+    grid-area: messages;
     margin-left: 2em;
     text-align: left;
-    grid-row-start: 3;
-    grid-column: 1 / -1;
 }
