@@ -15,7 +15,7 @@ ul {
     grid-template-areas:
         'header header header header'
         'menu menu menu menu'
-        'score score score score'
+        '. score score .'
         'choices messages messages messages';
     grid-auto-rows: 1fr;
 }
@@ -37,9 +37,9 @@ ul {
     grid-area: score;
     display: flex;
     justify-content: center;
+    font-size: 48px;
     gap: 0.5em;
     margin: 0.5em;
-    font-size: 48px;
 }
 
 .playerChoice {
@@ -54,6 +54,8 @@ ul {
     font-style: italic;
     font-weight: 500;
     font-size: 24px;
+    cursor: pointer;
+    
 }
 
 .choiceButton span {
