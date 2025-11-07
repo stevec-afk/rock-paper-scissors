@@ -15,16 +15,16 @@
     <div class="grid-container">
         <div class="banner"></div>
         <div class="menu"> 
-            <a href="https://www.youtube.com/watch?v=pIpmITBocfM" target="_blank">Rules</a> | 
+            <a href="https://www.youtube.com/watch?v=pIpmITBocfM" target="_blank">Explanation</a> | 
             <a href="https://www.samkass.com/theories/RPSSL.html" target="_blank">Original version</a> | 
             <a href="https://github.com/stevec-afk/rock-paper-scissors" target="_blank">Github</a>
         </div>
         <div class="playerChoice">
-            <div class="choiceButton" id="rock">ROCK <span>🪨</span></div>
-            <div class="choiceButton" id="paper">PAPER <span>📄</span></div>                    
-            <div class="choiceButton" id="scissors">SCISSORS <span>✂️</span></div>
-            <div class="choiceButton" id="lizard">LIZARD <span>🦎</span></div>
-            <div class="choiceButton" id="spock">SPOCK <span>🖖</span></div>
+            <button class="choiceButton" id="rock">ROCK <span>🪨</span></button>
+            <button class="choiceButton" id="paper">PAPER <span>📄</span></button>            
+            <button class="choiceButton" id="scissors">SCISSORS <span>✂️</span></button>
+            <button class="choiceButton" id="lizard">LIZARD <span>🦎</span></button>
+            <button class="choiceButton" id="spock">SPOCK <span>🖖</span></button>
         </div>
         <div class="score">
             <div id="playerScore">0</div>
@@ -33,11 +33,33 @@
         </div>     
         <div class="messages">
             <ul>
+                <li> Round 1: Lizard Poisons Spock <span class="roundResult">🦎 ✅️</span></li>
                 <li>Make your selection on the left to start.</li>
-                <!-- <li> Round 1: Lizard Poisons Spock <span class="roundResult">🦎 ✅️</span></li> -->
             </ul>
         </div>
-     </div>
+    </div>
+    <div class="buttons-container">
+        <button class="bottom-btn" id="reset-btn" onclick="gameOver()">New Game</button>
+        <button class="bottom-btn" id="rules-btn" onclick="toggleRules()">Rules</button>
+    </div>
+    <section class="modal">
+        <div class="rules-text"> 
+            <button class="close">&times;</button>
+            <h3>Rules:</h3>
+            <ul>
+                <li>✂️ <strong>Scissors</strong> cuts Paper</li>
+                <li>📄 <strong>Paper</strong> covers Rock</li>
+                <li>🪨 <strong>Rock</strong> crushes Lizard</li>
+                <li>🦎 <strong>Lizard</strong> poisons Spock</li>
+                <li>🖖 <strong>Spock</strong> smashes Scissors</li>
+                <li>✂️ <strong>Scissors</strong> decapitates Lizard</li>
+                <li>🦎 <strong>Lizard</strong> eats Paper</li>
+                <li>📄 <strong>Paper</strong> disproves Spock</li>
+                <li>🖖 <strong>Spock</strong> vaporizes Rock</li>
+                <li>🪨 <strong>Rock</strong> crushes Scissors</li>
+            </ul>
+        </div>
+    </section>
 </body>
 <footer>
 </footer>

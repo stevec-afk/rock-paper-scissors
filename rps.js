@@ -1,33 +1,44 @@
-/* ToDo:
-- DONE: Remove logic limiting to 5 rounds, and instead make it first to 5 wins
-- DONE: Move results to seperate function
-- DONE: Add a replay button (whew that was harder than I thought!)
-- Create a UI on the HTML pages, including
-    - DONE: Start game button to trigger playRound() function
-    - Scoreboard
-    - Buttons to click for playerChoice()
-    - output results of round & game to HTML page instead of console
-    - Display icon to show choices
-- Add unique language for each scenario, ie.: paper DISPROVES spock.
-- Cleanup comments
-- Advanced mode: Update the game logic to rock-paper-scissors-lizard-spock (Major feature - new branch, do seperately)
-    - Add link to youtube clip of TBBT explaining - https://www.youtube.com/watch?v=pIpmITBocfM
-    - Static image showing rules / logic - CC license requires attribution: https://puzzlewocky.com/parlor-games/rock-paper-scissors-lizard-spock/
-    - link to original rules on the web - also CC-NC3.0 license, requires attribution: https://www.samkass.com/theories/RPSSL.html
-- Text mode: old-school adventure style game played only by console
-*/
 let playerScore = 0;
 let computerScore = 0;
 let drawScore = 0;
 let playerChoice = "";
 let computerChoice = 0;
 
-const rockButton = document.createElement("button");
-rockButton.textContent = "rock";
-const paperButton = document.createElement("button");
-paperButton.textContent = "paper";
-const scissorsButton = document.createElement("button");
-scissorsButton.textContent = "scissors";
+const rockButton = document.getElementById("rock");
+const paperButton = document.getElementById("paper");
+const scissorsButton = document.createElement("scissors");
+const lizardButton = document.createElement("lizard");
+const spockButton = document.createElement("spock");
+
+const winConditions = {
+    rock: {
+        scissors: 'crushes',
+        lizard: 'crushes'
+    },
+    paper: {
+        rock: 'covers',
+        spock: 'disproves'
+    },
+    scissors: {
+        paper: 'cuts',
+        lizard: 'decapitates'
+    },
+    lizard: {
+        paper: 'eats',
+        spock: 'poisons'
+    },
+    spock: {
+        rock: 'vaporizes',
+        scissors: 'smashes'
+    }
+};
+
+// Modal visibility for rules button
+const rulesBtn = document.getElementById("rules-btn");
+const closeBtn = document.querySelector(".close");
+const modal = document.querySelector(".modal");
+rulesBtn.onclick = () => (modal.style.display = "block");
+closeBtn.onclick = () => (modal.style.display = "none");
 
 // Generate a number between 1-3 inclusive to choose from 3 options
 function getComputerChoice() {
@@ -84,24 +95,14 @@ function gameOver() {
         console.log("Its a draw!")
     }
 
-    rockButton.remove();
-    paperButton.remove();
-    scissorsButton.remove();
-
     // Add a button to replay the game
-    const replayButton = document.createElement('button');
-    replayButton.textContent = "Play again?";
-    replayButton.classList.add('startButton');
-    gameContainer.appendChild(replayButton);
-    initButton = document.querySelector('.startButton');
+    const replayButton = document.getElementById('reset-btn');
     replayButton.addEventListener('click', main); 
-
 }
 
 // Main game loop - start on button click
 function main(){
     // Reset the game 
-    initButton.remove();
     playerScore = 0;
     computerScore = 0;
     drawScore = 0;
@@ -116,7 +117,3 @@ function main(){
         gameContainer.appendChild(option);
     });
 }
-
-const gameContainer = document.getElementById('gameContainer');
-let initButton = document.querySelector('.startButton');
-initButton.addEventListener('click', main);
