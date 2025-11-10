@@ -39,13 +39,13 @@ rulesBtn.addEventListener('click', () => {
     rulesText.classList.remove('hide'); // Applies fade-out animation in CSS
 });
 
-// Hide the rules modal by clicking anywhere 
+// Hide the rules modal by clicking anywhere - modal covers whole document 
 modal.addEventListener('click', () => {
     rulesText.classList.add('hide');
     rulesText.classList.remove('show');
     rulesText.addEventListener('animationend', () => {
         modal.style.display = 'none';
-    }, {once: true});
+    }, {once: true}); // prevents running on the fade-in animationend trigger
 });
 
 function playRound(playerChoice){
