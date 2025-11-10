@@ -27,7 +27,6 @@ const winConditions = {
     }
 };
 
-
 const rulesBtn = document.getElementById("rules-btn");
 const modal = document.querySelector(".modal");
 const rulesText = document.querySelector(".rules-text");
@@ -107,10 +106,8 @@ function endGame() {
         // >lose message here< 
         //console.log("Final result: Computer wins! Better luck next time!");
     }
-
 }
 
-// Main game loop - start on button click
 function resetGame(){
     playerScore = 0;
     computerScore = 0;
@@ -123,7 +120,5 @@ function resetGame(){
     document.getElementById('player-score').textContent = playerScore;
     document.getElementById('computer-score').textContent = computerScore;
 
-    // Clear messages
-    // <code> 
-
+    // todo: Clear messages
 }
