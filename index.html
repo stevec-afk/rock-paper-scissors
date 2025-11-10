@@ -15,21 +15,21 @@
     <div class="grid-container">
         <div class="banner"></div>
         <div class="menu"> 
-            <a href="https://www.youtube.com/watch?v=pIpmITBocfM" target="_blank">Explanation</a> | 
+            <a href="https://www.youtube.com/watch?v=pIpmITBocfM" target="_blank">How it works</a> | 
             <a href="https://www.samkass.com/theories/RPSSL.html" target="_blank">Original version</a> | 
             <a href="https://github.com/stevec-afk/rock-paper-scissors" target="_blank">Github</a>
         </div>
         <div class="playerChoice">
-            <button class="choiceButton" id="rock">ROCK <span>🪨</span></button>
-            <button class="choiceButton" id="paper">PAPER <span>📄</span></button>            
-            <button class="choiceButton" id="scissors">SCISSORS <span>✂️</span></button>
-            <button class="choiceButton" id="lizard">LIZARD <span>🦎</span></button>
-            <button class="choiceButton" id="spock">SPOCK <span>🖖</span></button>
+            <button class="choiceButton" id="rock" onclick="playRound('rock')">ROCK <span>🪨</span></button>
+            <button class="choiceButton" id="paper" onclick="playRound('paper')">PAPER <span>📄</span></button>            
+            <button class="choiceButton" id="scissors" onclick="playRound('scissors')">SCISSORS <span>✂️</span></button>
+            <button class="choiceButton" id="lizard" onclick="playRound('lizard')">LIZARD <span>🦎</span></button>
+            <button class="choiceButton" id="spock" onclick="playRound('spock')">SPOCK <span>🖖</span></button>
         </div>
         <div class="score">
-            <div id="playerScore">0</div>
+            <div id="player-score">0</div>
              - 
-            <div id="computerScore">0</div>
+            <div id="computer-score">0</div>
         </div>     
         <div class="messages">
             <ul>
@@ -39,12 +39,11 @@
         </div>
     </div>
     <div class="buttons-container">
-        <button class="bottom-btn" id="reset-btn" onclick="gameOver()">New Game</button>
-        <button class="bottom-btn" id="rules-btn" onclick="toggleRules()">Rules</button>
+        <button class="bottom-btn" id="reset-btn" onclick="resetGame()">New Game</button>
+        <button class="bottom-btn" id="rules-btn">Rules</button>
     </div>
     <section class="modal">
         <div class="rules-text"> 
-            <button class="close">&times;</button>
             <h3>Rules:</h3>
             <ul>
                 <li>✂️ <strong>Scissors</strong> cuts Paper</li>
