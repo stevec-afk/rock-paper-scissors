@@ -65,7 +65,7 @@ function playRound(playerChoice) {
     // Time to cheat for the memes!
     if (playerChoice == 'Spock') {  
         spockClicks++;
-        computerChoice = choices[4]; 
+        computerChoice = choices[4];
     } else {
         // Generate a number between 1-5 inclusive to choose from 5 options
         computerChoice = choices[Math.floor(Math.random() * 5)];
@@ -133,6 +133,7 @@ function endGame() {
     }
 }
 
+// Takes a string and inserts it a list in the output box on the HTML page
 function output(message) {
     const messageList = document.getElementById('output');
     const newItem = document.createElement('li');
