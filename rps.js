@@ -2,28 +2,36 @@ let playerScore = 0;
 let computerScore = 0;
 let gameOver = false;
 
-const choices = ['rock', 'paper', 'scissors', 'lizard', 'spock'];
+const choices = ['Rock', 'Paper', 'Scissors', 'Lizard', 'Spock'];
+
+const emojis = {
+    Rock: '🪨',
+    Paper: '📄',
+    Scissors: '✂️',
+    Lizard: '🦎',
+    Spock: '🖖'
+};
 
 const winConditions = {
-    rock: {
-        scissors: 'crushes',
-        lizard: 'crushes'
+    Rock: {
+        Scissors: 'crushes',
+        Lizard: 'crushes'
     },
-    paper: {
-        rock: 'covers',
-        spock: 'disproves'
+    Paper: {
+        Rock: 'covers',
+        Spock: 'disproves'
     },
-    scissors: {
-        paper: 'cuts',
-        lizard: 'decapitates'
+    Scissors: {
+        Paper: 'cuts',
+        Lizard: 'decapitates'
     },
-    lizard: {
-        paper: 'eats',
-        spock: 'poisons'
+    Lizard: {
+        Paper: 'eats',
+        Spock: 'poisons'
     },
-    spock: {
-        rock: 'vaporizes',
-        scissors: 'smashes'
+    Spock: {
+        Rock: 'vaporizes',
+        Scissors: 'smashes'
     }
 };
 
@@ -33,6 +41,7 @@ const rulesText = document.querySelector(".rules-text");
 
 // Show the rules modal
 rulesBtn.addEventListener('click', () => {
+    console.log('Showing rules modal...')
     modal.style.display = 'block'; 
     rulesText.classList.add('show'); // Applies fade-in animation in CSS
     rulesText.classList.remove('hide'); // Applies fade-out animation in CSS
@@ -40,6 +49,7 @@ rulesBtn.addEventListener('click', () => {
 
 // Hide the rules modal by clicking anywhere - modal covers whole document 
 modal.addEventListener('click', () => {
+    console.log('Closing rules modal...')
     rulesText.classList.add('hide');
     rulesText.classList.remove('show');
     rulesText.addEventListener('animationend', () => {
@@ -48,15 +58,25 @@ modal.addEventListener('click', () => {
 });
 
 function playRound(playerChoice){
-    console.log(playerChoice);
     if (gameOver) return;
+    console.log(`Player chose: ${playerChoice}`);
 
-    // Generate a number between 1-5 inclusive to choose from 5 options
-    const computerChoice = choices[Math.floor(Math.random() * 5)];
+    let computerChoice = 0;
+    if (playerChoice == 'Spock') {
+        computerChoice = choices[4]; 
+        console.log('The computer always chooses spock if you do!');
+        console.log('...Who said the game had to be fair? 😂');
+        console.log('See: https://www.youtube.com/watch?v=jnfz_9d9BUA&t=108s');
+    } else {
+        // Generate a number between 1-5 inclusive to choose from 5 options
+        computerChoice = choices[Math.floor(Math.random() * 5)];
+        console.log(`Computer chose: ${computerChoice}`);
+    }
+
     const result = determineWinner(playerChoice, computerChoice);
 
     updateScores(result.outcome);
-    displayResult(result, playerChoice, computerChoice)
+    output(`You chose ${emojis[playerChoice]} - ${result.reason}.`);
     
     if (playerScore > 4 || computerScore > 4 ){
         endGame()
@@ -65,18 +85,22 @@ function playRound(playerChoice){
 
 function determineWinner(player, computer){
     if (player === computer) {
-        return { outcome: 'tie', reason: '' };
+        return { 
+            outcome: 'tie', 
+            reason: `Computer also chose ${computer}! No points.` 
+        };
     }
-    if (winConditions[player] && winConditions[player][computer]) {
+    else if (winConditions[player] && winConditions[player][computer]) {
         return { 
             outcome: 'win', 
             reason: `${player} ${winConditions[player][computer]} ${computer}`
         };
+    } else {
+        return { 
+            outcome: 'lose',
+            reason: `${computer} ${winConditions[computer][player]} ${player}`
+        };
     }
-    return { 
-        outcome: 'lose',
-        reason: `${computer} ${winConditions[computer][player]} ${player}`
-    };
 }
 
 function updateScores(outcome){
@@ -89,26 +113,37 @@ function updateScores(outcome){
     }
 }
 
-function displayResult(result, playerChoice, computerChoice) {
-    // This part will be different
-}
-
 function endGame() {
     gameOver = true;
     const choiceButtons = document.querySelectorAll('.choiceButton');
     choiceButtons.forEach(btn => btn.classList.add('disabled'));
 
+    output('-------');
+    output("Click 'New Game' below to start a new game.");
     if (playerScore > computerScore){ 
-        // >winner message here<
-        //console.log("Final result: Player wins! Congrats!");
-    }
-    else {
-        // >lose message here< 
-        //console.log("Final result: Computer wins! Better luck next time!");
+        output(`Game over. Final result: Player wins ${playerScore} - ${computerScore}! Congrats! 🏆`);
+    } else {
+        // Winner's score is read first because sports. Trust me bro.
+        output(`Game over. Final result: Computer wins ${computerScore} - ${playerScore}. Better luck next time!`);
     }
 }
 
-function resetGame(){
+function output(message) {
+    const messageList = document.getElementById('output');
+    const newItem = document.createElement('li');
+
+    if (message == 'clear') { 
+        messageList.textContent = ''; // No need to use .innerHTML!
+        return;
+    } else {
+        newItem.textContent = message;
+        messageList.prepend(newItem);
+    }
+}
+
+function resetGame() {
+    console.clear();
+    console.log('Starting new game...');
     playerScore = 0;
     computerScore = 0;
     gameOver = false;
@@ -116,9 +151,10 @@ function resetGame(){
     const choiceButtons = document.querySelectorAll('.choiceButton');
     choiceButtons.forEach(btn => btn.classList.remove('disabled'));
 
-    // template: document.getElementById('').textContent = ;
     document.getElementById('player-score').textContent = playerScore;
     document.getElementById('computer-score').textContent = computerScore;
 
-    // todo: Clear messages
+    output('clear');
+    output('Starting new game...');
+    output('Choose your move!');
 }
