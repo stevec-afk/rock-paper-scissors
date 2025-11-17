@@ -81,7 +81,7 @@ function playRound(playerChoice) {
         console.log('...Who said the game had to be fair? 🤪');
         console.log('See: https://www.youtube.com/watch?v=jnfz_9d9BUA&t=108s');
         output("...wait something seems odd. Better check the console log! ⚠️")
-        spockClicks = 0;
+        // spockClicks = 0;
     }
 
     if (playerScore > 4 || computerScore > 4 ){
