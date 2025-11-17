@@ -133,7 +133,7 @@ function endGame() {
     }
 }
 
-// Takes a string and inserts it a list in the output box on the HTML page
+// Takes a string and inserts it in a list in the output box on the HTML page
 function output(message) {
     const messageList = document.getElementById('output');
     const newItem = document.createElement('li');
