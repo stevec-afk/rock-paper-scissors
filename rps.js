@@ -1,6 +1,7 @@
 let playerScore = 0;
 let computerScore = 0;
 let gameOver = false;
+let spockClicks = 0;
 
 const choices = ['Rock', 'Paper', 'Scissors', 'Lizard', 'Spock'];
 
@@ -57,29 +58,34 @@ modal.addEventListener('click', () => {
     }, {once: true}); // prevents running on the fade-in animationend trigger
 });
 
-function playRound(playerChoice){
-    if (gameOver) return;
-    console.log(`Player chose: ${playerChoice}`);
-
+function playRound(playerChoice) {
     let computerChoice = 0;
-    if (playerChoice == 'Spock') {
+    if (gameOver) return;
+
+    // Time to cheat for the memes!
+    if (playerChoice == 'Spock') {  
+        spockClicks++;
         computerChoice = choices[4]; 
-        console.log('The computer always chooses spock if you do!');
-        console.log('...Who said the game had to be fair? 😂');
-        console.log('See: https://www.youtube.com/watch?v=jnfz_9d9BUA&t=108s');
     } else {
         // Generate a number between 1-5 inclusive to choose from 5 options
         computerChoice = choices[Math.floor(Math.random() * 5)];
-        console.log(`Computer chose: ${computerChoice}`);
     }
 
     const result = determineWinner(playerChoice, computerChoice);
-
     updateScores(result.outcome);
     output(`You chose ${emojis[playerChoice]} - ${result.reason}.`);
-    
+
+    // Give the player a hint if they click Spock 4 times
+    if (spockClicks == 4) {
+        console.log('Note: the computer always chooses spock if you do!');
+        console.log('...Who said the game had to be fair? 🤪');
+        console.log('See: https://www.youtube.com/watch?v=jnfz_9d9BUA&t=108s');
+        output("...wait something seems odd. Better check the console log! ⚠️")
+        spockClicks = 0;
+    }
+
     if (playerScore > 4 || computerScore > 4 ){
-        endGame()
+        endGame();
     }
 }
 
@@ -87,7 +93,7 @@ function determineWinner(player, computer){
     if (player === computer) {
         return { 
             outcome: 'tie', 
-            reason: `Computer also chose ${computer}! No points.` 
+            reason: `Computer also chose ${computer}! No points` 
         };
     }
     else if (winConditions[player] && winConditions[player][computer]) {
@@ -117,7 +123,6 @@ function endGame() {
     gameOver = true;
     const choiceButtons = document.querySelectorAll('.choiceButton');
     choiceButtons.forEach(btn => btn.classList.add('disabled'));
-
     output('-------');
     output("Click 'New Game' below to start a new game.");
     if (playerScore > computerScore){ 
@@ -146,6 +151,7 @@ function resetGame() {
     console.log('Starting new game...');
     playerScore = 0;
     computerScore = 0;
+    spockClicks = 0;
     gameOver = false;
 
     const choiceButtons = document.querySelectorAll('.choiceButton');
